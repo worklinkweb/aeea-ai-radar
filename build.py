@@ -92,9 +92,9 @@ window.DECK = window.DECK || {{}}; window.DECK.STUDENT = true; window.DECK.QR_RU
 </script>
 """
     shead = head.replace('<title>AEEA AI 學習雷達</title>', '<title>AI 學習雷達｜學員版</title>')
-    (ROOT / 'student').mkdir(exist_ok=True)
-    (ROOT / 'student' / 'index.html').write_text(
+    (ROOT / 'st').mkdir(exist_ok=True)
+    (ROOT / 'st' / 'index.html').write_text(
         '<!doctype html>\n<html lang="zh-Hant">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
         + shead + '</head>\n<body>\n' + sbody + '</body>\n</html>\n', encoding='utf-8')
-    print('built student/index.html')
+    print('built st/index.html')
