@@ -3,7 +3,8 @@
 講者：Lynn Lin ・ 2026/09/28 ・ 線上 40 分鐘 ・ 所有官方資料 Last verified 2026/09/28
 
 ## 線上版本
-- GitHub Pages：啟用後網址為 `https://<你的帳號>.github.io/aeea-ai-radar/`（QR Code 會自動指向這個網址的 `#radar`，不必重新產生）。
+- 學員版（無講者模式）：`https://worklinkweb.github.io/aeea-ai-radar/student/`，重建：`STUDENT=1 PAGES=1 python3 build.py`
+- GitHub Pages：啟用後網址為 `https://worklinkweb.github.io/aeea-ai-radar/`（QR Code 會自動指向這個網址的 `#radar`，不必重新產生）。
 - claude.ai Artifact 版：可使用 Claude 分析找課（需觀眾授權）；GitHub Pages 版使用規則引擎找課。
 
 ## 啟動方式

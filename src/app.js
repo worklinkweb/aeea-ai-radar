@@ -10,7 +10,7 @@
   const TOTAL = SL.length;
   const CHANNEL = 'aeea-radar-deck';
   let bc = null;
-  try { bc = new BroadcastChannel(CHANNEL); } catch (e) { bc = null; }
+  try { bc = D.STUDENT ? null : new BroadcastChannel(CHANNEL); } catch (e) { bc = null; }
 
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -44,7 +44,7 @@
   const fmt = sec => { const s = Math.max(0, Math.round(Math.abs(sec))); return `${Math.floor(s / 60)}:${pad(s % 60)}`; };
 
   /* ---------- presenter route ---------- */
-  if (location.hash === '#presenter') { renderPresenter(); return; }
+  if (location.hash === '#presenter' && !D.STUDENT) { renderPresenter(); return; }
 
   /* ================= AUDIENCE / SCROLL VIEW ================= */
   const state = { idx: 0, build: {}, presenting: false, fsEntered: false };
@@ -57,7 +57,7 @@
       <nav class="partnav" aria-label="章節">${D.parts.map(p => `<button type="button" data-part-go="${p.id}">${p.id === 'open' || p.id === 'end' ? p.label : `P${p.id} ${p.label}`}</button>`).join('')}<button type="button" data-part-go="radar">Prompt 工具</button></nav>
       <div class="tb-actions">
         <button type="button" class="tb-btn" data-open-sources>來源</button>
-        <button type="button" class="tb-btn" data-presenter>講者<span class="lbl-long">模式</span></button>
+        ${D.STUDENT ? '' : '<button type="button" class="tb-btn" data-presenter>講者<span class="lbl-long">模式</span></button>'}
         <button type="button" class="tb-btn primary" data-present>▶ 簡報<span class="lbl-long">模式</span></button>
       </div>
       <div class="scrollbar-progress" aria-hidden="true"></div>
@@ -73,7 +73,7 @@
       <div class="foot-contact"><h3>聯繫資訊</h3><p>沃領客資訊｜教育訓練總監｜Lynn Lin</p><p><span>lynn.lin@worklink.app</span>　<span>0800-008-135</span></p></div>
       <h3>官方資料來源（Last verified ${D.VERIFIED_DATE}）</h3>
       <ul>${Object.values(P).filter((v, i, a) => a.findIndex(x => x.url === v.url) === i).map(v => `<li>${v.agency}｜${v.title}｜<a href="${v.url}" target="_blank" rel="noopener">${v.url}</a>${v.status !== 'VERIFIED' ? '（NEEDS VERIFICATION）' : ''}</li>`).join('')}</ul>
-      <p class="tiny">操作：▶ 簡報模式後，← → 或空白鍵切換，Esc 離開，F 全螢幕。講者模式可在另一個分頁看備註與計時。</p>
+      <p class="tiny">操作：▶ 簡報模式後，← → 或空白鍵切換，Esc 離開，F 全螢幕。${D.STUDENT ? '' : '講者模式可在另一個分頁看備註與計時。'}</p>
     </div></footer>
     <div class="pres-ui">
       <div class="pres-line"><i></i></div>
@@ -82,7 +82,7 @@
         <button type="button" data-prev aria-label="上一頁">←</button>
         <button type="button" data-next aria-label="下一頁">→</button>
         <button type="button" data-fs>全螢幕</button>
-        <button type="button" data-presenter>講者</button>
+        ${D.STUDENT ? '' : '<button type="button" data-presenter>講者</button>'}
         <button type="button" data-exit>Esc 離開</button>
       </div>
     </div>
@@ -349,7 +349,7 @@
     else if (e.key === 'Home') go(0, 0);
     else if (e.key === 'End') go(TOTAL - 1, 'max');
     else if (e.key === 'f' || e.key === 'F') toggleFs();
-    else if (e.key === 'p' || e.key === 'P') openPresenter();
+    else if ((e.key === 'p' || e.key === 'P') && !D.STUDENT) openPresenter();
   });
   // swipe
   let tx = null, ty = null;

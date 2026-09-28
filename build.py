@@ -68,3 +68,33 @@ if os.environ.get('PAGES'):
     '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
     + head + '</head>\n<body>\n' + body + '</body>\n</html>\n', encoding='utf-8')
 print('built', (DIST / 'index.html').stat().st_size, 'bytes', 'QR' if radar_url else 'no QR')
+
+# Student build: no presenter mode, no speaker notes, no organiser eyebrow on the cover
+if os.environ.get('STUDENT'):
+    lib = (ROOT / 'vendor' / 'qrcode-generator-1.4.4.js').read_text(encoding='utf-8')
+    sdata = '\n'.join(
+        ("window.DECK = window.DECK || {}; window.DECK.speakerNotes = {};" if f == 'speakerNotes.js'
+         else (SRC / 'data' / f).read_text(encoding='utf-8'))
+        for f in DATA_ORDER)
+    sbody = f"""<style>
+{css}
+</style>
+<div id="app"></div>
+<script>
+{lib}
+window.DECK = window.DECK || {{}}; window.DECK.STUDENT = true; window.DECK.QR_RUNTIME = true;
+</script>
+<script>
+{sdata}
+</script>
+<script>
+{app}
+</script>
+"""
+    shead = head.replace('<title>AEEA AI 學習雷達</title>', '<title>AI 學習雷達｜學員版</title>')
+    (ROOT / 'student').mkdir(exist_ok=True)
+    (ROOT / 'student' / 'index.html').write_text(
+        '<!doctype html>\n<html lang="zh-Hant">\n<head>\n<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+        + shead + '</head>\n<body>\n' + sbody + '</body>\n</html>\n', encoding='utf-8')
+    print('built student/index.html')

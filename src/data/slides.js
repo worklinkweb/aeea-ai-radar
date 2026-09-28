@@ -54,7 +54,7 @@ window.DECK = window.DECK || {};
       html: () => `
       <div class="cover">
         <div class="cover-text">
-          <p class="eyebrow">AEEA AI賦能創業協會 · 線上分享</p>
+          ${D.STUDENT ? '' : '<p class="eyebrow">AEEA AI賦能創業協會 · 線上分享</p>'}
           <h1 class="h1 cover-title">AI 最新應用趨勢<br><span class="x">×</span> AI 學習雷達</h1>
           <p class="cover-sub">先用對 AI，再把工作交給 AI。</p>
           <div class="cover-meta">
