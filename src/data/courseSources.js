@@ -40,6 +40,19 @@ window.DECK.resourceMap = [
     url: 'https://eii.nat.gov.tw/aimfg/',
     host: 'eii.nat.gov.tw/aimfg',
     src: 'ida-aimfg'
+  },
+  {
+    key: 'D',
+    agency: '勞動部',
+    agencyFull: '勞動部勞動力發展署',
+    name: '產業人才投資方案',
+    who: '有勞保、就保、職保或農保的在職勞工（各行業）',
+    type: '各分署在職課程，含生成式 AI、智慧製造',
+    fee: '補助 80%；45 歲以上等 100%；3 年最高 10 萬',
+    feeTone: 'free',
+    url: 'https://ojt.wda.gov.tw/',
+    host: 'ojt.wda.gov.tw',
+    src: 'mol-news'
   }
 ];
 

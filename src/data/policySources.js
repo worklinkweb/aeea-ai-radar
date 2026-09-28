@@ -280,5 +280,35 @@ window.DECK.policySources = {
     url: 'https://support.google.com/a/answer/15706919?hl=en',
     verified: '2026/09/28', status: 'VERIFIED',
     facts: ['未經客戶事先允許，Workspace 不會用客戶資料訓練模型。', '對話與上傳檔案不會在未經允許下由人工審查，或用於訓練網域外的生成式 AI 模型。', '開啟對話記錄時，管理員可設定 3、18 或 36 個月自動刪除，預設 18 個月；關閉時最多保留 72 小時。']
+  },
+  'mol-news': {
+    agency: '勞動部勞動力發展署', title: '台灣就業通｜產業人才投資方案補助加碼 3 年 10 萬（2025-01-13）',
+    url: 'https://course.taiwanjobs.gov.tw/news/detail?id=e88fb77e-0a1f-4ab1-b46e-e249ed2029f4',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['自 2025 年 1 月 1 日起，每人每 3 年補助上限由 7 萬元加碼為 10 萬元。', '參訓資格：年滿 15 歲以上，具就業保險、勞工保險、勞工職業災害保險或農民健康保險被保險人身分之在職勞工（具其中一種即可）。', '完成訓練時數者，補助 80% 或 100% 訓練費用。', '報名平台：台灣就業通「在職訓練網」。']
+  },
+  'mol-10w': {
+    agency: '勞動部勞動力發展署', title: '桃竹苗分署｜產業人才投資方案 3 年 10 萬如何計算',
+    url: 'https://thmr.wda.gov.tw/News_Content.aspx?n=1A79903405D714E4&sms=6789F97D2E2677C3&s=6B8BBC06EF5448C2',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['3 年 10 萬自 114 年（2025 年）1 月 1 日起實施。', '以學員初次參加產業人才投資方案等課程的開訓日起算 3 年；期滿後再參訓，以新課程開訓日重新起算。']
+  },
+  'mol-rules': {
+    agency: '勞動部勞動力發展署', title: '產業人才投資方案參訓學員須知（台灣就業通）',
+    url: 'https://course.taiwanjobs.gov.tw/Content/Uploads/Folksonomy/d819a591-8feb-4107-bd53-8137548d0690/e969a0c2-4614-4cf5-8103-40a9b4cea364.pdf',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['一般對象補助 80% 訓練費用。', '特定對象補助 100%：含中高齡者、65 歲以上者、低收入戶或中低收入戶中有工作能力者、原住民、身心障礙者、獨力負擔家計者等。', '此份須知寫 3 年 7 萬元，為加碼前版本；2025/1/1 起為 3 年 10 萬元（見另一則官方公告）。']
+  },
+  'ey-45': {
+    agency: '行政院', title: '中高齡者及高齡者就業促進法（重要政策）',
+    url: 'https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/94f0e79c-ef0f-4f52-9352-07515172fcff',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['中高齡者：年滿 45 歲至 65 歲；高齡者：超過 65 歲。', '因此「45 歲以上」的在職勞工屬於產業人才投資方案全額補助的特定對象（仍須符合其他參訓資格）。']
+  },
+  'mol-ojt': {
+    agency: '勞動部勞動力發展署', title: '台灣就業通｜在職訓練網',
+    url: 'https://ojt.wda.gov.tw/',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['首頁查詢列第一個下拉選單可選「產業人才投資方案」，再輸入課程關鍵字（例如 AI）查詢。', '查詢區間預設為最近 3 個月開訓課程。', '報名與參訓紀錄需登入會員。', '（依講者 2026/09/28 提供的網站畫面）']
   }
 };

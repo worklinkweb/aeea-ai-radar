@@ -1,50 +1,75 @@
 #!/usr/bin/env python3
-"""Build the single-file presentation.
+"""Build the presentation.
 
-  python3 build.py                      -> dist/index.html (standalone) + dist/artifact.html (for claude.ai Artifact)
-  RADAR_URL=https://... python3 build.py -> also embeds a real QR code pointing to RADAR_URL
+  python3 build.py
+
+Outputs
+  index.html          學員版（GitHub Pages 根目錄）：無講者模式、無講者備註
+  tr/index.html       講師版（/tr/）：含講者模式與備註
+  st/index.html       舊網址轉址 → 學員版
+  student/index.html  舊網址轉址 → 學員版
+  dist/artifact.html  claude.ai Artifact 版（講師版內容）
+  dist/index.html     離線單檔（講師版內容）
+
+QR Code 一律指向學員版的 #radar（RADAR_URL 可覆寫）。需要 `pip install qrcode`。
 """
-import os, io, html
+import os, io
 from pathlib import Path
+import qrcode, qrcode.image.svg
 
 ROOT = Path(__file__).parent
 SRC = ROOT / 'src'
 DIST = ROOT / 'dist'
 DIST.mkdir(exist_ok=True)
 
-DATA_ORDER = ['policySources.js', 'courseSources.js', 'courseSnapshot.js', 'prompts.js', 'speakerNotes.js', 'shots.js', 'slides.js']
+STUDENT_URL = os.environ.get('STUDENT_URL', 'https://worklinkweb.github.io/aeea-ai-radar/')
+RADAR_URL = os.environ.get('RADAR_URL', STUDENT_URL + '#radar')
 
-radar_url = os.environ.get('RADAR_URL', '').strip()
-qr_js = ''
-if radar_url:
-    import qrcode, qrcode.image.svg
-    qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M, border=2)
-    qr.add_data(radar_url)
-    qr.make(fit=True)
-    img = qr.make_image(image_factory=qrcode.image.svg.SvgPathImage)
-    buf = io.BytesIO(); img.save(buf)
-    svg = buf.getvalue().decode('utf-8')
-    svg = svg[svg.index('<svg'):]
-    # PNG copy for QA decoding
-    qr.make_image(fill_color='black', back_color='white').save(DIST / 'qr.png')
-    qr_js = f"window.DECK.QR_SVG = {svg!r};\nwindow.DECK.RADAR_URL = {radar_url!r};\n"
+DATA_ORDER = ['policySources.js', 'courseSources.js', 'courseSnapshot.js', 'prompts.js',
+              'speakerNotes.js', 'shots.js', 'slides.js']
+
+# QR code (baked SVG + PNG copy for checking)
+qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M, border=2)
+qr.add_data(RADAR_URL)
+qr.make(fit=True)
+buf = io.BytesIO()
+qr.make_image(image_factory=qrcode.image.svg.SvgPathImage).save(buf)
+svg = buf.getvalue().decode('utf-8')
+svg = svg[svg.index('<svg'):]
+qr.make_image(fill_color='black', back_color='white').save(DIST / 'qr.png')
+qr_js = f"window.DECK.QR_SVG = {svg!r};\nwindow.DECK.RADAR_URL = {RADAR_URL!r};\n"
 
 css = (SRC / 'styles.css').read_text(encoding='utf-8')
-data = '\n'.join((SRC / 'data' / f).read_text(encoding='utf-8') for f in DATA_ORDER)
 app = (SRC / 'radar.js').read_text(encoding='utf-8') + '\n' + (SRC / 'app.js').read_text(encoding='utf-8')
 
-head = """<title>AEEA AI 學習雷達</title>
+
+def data_js(student):
+    parts = []
+    for f in DATA_ORDER:
+        if student and f == 'speakerNotes.js':
+            parts.append("window.DECK = window.DECK || {}; window.DECK.speakerNotes = {};")
+        else:
+            parts.append((SRC / 'data' / f).read_text(encoding='utf-8'))
+    return '\n'.join(parts)
+
+
+def head(title):
+    return f"""<title>{title}</title>
 <meta name="description" content="AEEA AI 最新應用趨勢 × AI 學習雷達｜互動式 Web Presentation（Lynn Lin，2026/09/28）">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;800;900&display=swap">
 """
-body = f"""<style>
+
+
+def body(student):
+    flag = "window.DECK = window.DECK || {}; window.DECK.STUDENT = true;\n" if student else "window.DECK = window.DECK || {};\n"
+    return f"""<style>
 {css}
 </style>
 <div id="app"></div>
 <script>
-{data}
+{flag}{data_js(student)}
 {qr_js}
 </script>
 <script>
@@ -52,49 +77,31 @@ body = f"""<style>
 </script>
 """
 
-(DIST / 'artifact.html').write_text(head + body, encoding='utf-8')
 
-# GitHub Pages build: QR Code is generated at runtime from the page's own URL (+#radar)
-if os.environ.get('PAGES'):
-    lib = (ROOT / 'vendor' / 'qrcode-generator-1.4.4.js').read_text(encoding='utf-8')
-    pages_body = body.replace('<div id="app"></div>', '<div id="app"></div>\n<script>\n' + lib + '\nwindow.DECK = window.DECK || {}; window.DECK.QR_RUNTIME = true;\n</script>', 1)
-    (ROOT / 'index.html').write_text(
-        '<!doctype html>\n<html lang="zh-Hant">\n<head>\n<meta charset="utf-8">\n'
-        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-        + head + '</head>\n<body>\n' + pages_body + '</body>\n</html>\n', encoding='utf-8')
-    print('built index.html for GitHub Pages')
-(DIST / 'index.html').write_text(
-    '<!doctype html>\n<html lang="zh-Hant">\n<head>\n<meta charset="utf-8">\n'
-    '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-    + head + '</head>\n<body>\n' + body + '</body>\n</html>\n', encoding='utf-8')
-print('built', (DIST / 'index.html').stat().st_size, 'bytes', 'QR' if radar_url else 'no QR')
+def full_doc(title, student):
+    return ('<!doctype html>\n<html lang="zh-Hant">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+            + head(title) + '</head>\n<body>\n' + body(student) + '</body>\n</html>\n')
 
-# Student build: no presenter mode, no speaker notes, no organiser eyebrow on the cover
-if os.environ.get('STUDENT'):
-    lib = (ROOT / 'vendor' / 'qrcode-generator-1.4.4.js').read_text(encoding='utf-8')
-    sdata = '\n'.join(
-        ("window.DECK = window.DECK || {}; window.DECK.speakerNotes = {};" if f == 'speakerNotes.js'
-         else (SRC / 'data' / f).read_text(encoding='utf-8'))
-        for f in DATA_ORDER)
-    sbody = f"""<style>
-{css}
-</style>
-<div id="app"></div>
-<script>
-{lib}
-window.DECK = window.DECK || {{}}; window.DECK.STUDENT = true; window.DECK.QR_RUNTIME = true;
-</script>
-<script>
-{sdata}
-</script>
-<script>
-{app}
-</script>
-"""
-    shead = head.replace('<title>AEEA AI 學習雷達</title>', '<title>AI 學習雷達｜學員版</title>')
-    (ROOT / 'st').mkdir(exist_ok=True)
-    (ROOT / 'st' / 'index.html').write_text(
-        '<!doctype html>\n<html lang="zh-Hant">\n<head>\n<meta charset="utf-8">\n'
-        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-        + shead + '</head>\n<body>\n' + sbody + '</body>\n</html>\n', encoding='utf-8')
-    print('built st/index.html')
+
+def redirect_doc():
+    return ('<!doctype html>\n<html lang="zh-Hant"><head><meta charset="utf-8">\n'
+            '<title>AI 學習雷達</title>\n'
+            '<meta http-equiv="refresh" content="0; url=../">\n'
+            f'<link rel="canonical" href="{STUDENT_URL}">\n'
+            "<script>location.replace('../' + location.hash);</script>\n"
+            f'</head><body><p>網址已更新：<a href="../">{STUDENT_URL}</a></p></body></html>\n')
+
+
+TEACHER_TITLE = 'AEEA AI 學習雷達｜講師版'
+STUDENT_TITLE = 'AEEA AI 學習雷達'
+
+(ROOT / 'index.html').write_text(full_doc(STUDENT_TITLE, True), encoding='utf-8')
+for d in ['tr', 'st', 'student']:
+    (ROOT / d).mkdir(exist_ok=True)
+(ROOT / 'tr' / 'index.html').write_text(full_doc(TEACHER_TITLE, False), encoding='utf-8')
+(ROOT / 'st' / 'index.html').write_text(redirect_doc(), encoding='utf-8')
+(ROOT / 'student' / 'index.html').write_text(redirect_doc(), encoding='utf-8')
+(DIST / 'artifact.html').write_text(head(TEACHER_TITLE) + body(False), encoding='utf-8')
+(DIST / 'index.html').write_text(full_doc(TEACHER_TITLE, False), encoding='utf-8')
+print('built: index.html (學員版), tr/index.html (講師版), st/ & student/ (轉址), dist/*  QR ->', RADAR_URL)

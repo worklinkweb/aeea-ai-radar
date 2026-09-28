@@ -170,8 +170,11 @@ window.RadarTool = (function () {
       if (c.audience === 'youth' && p.role === 'E') soft.push('學生需確認是否符合「應屆畢業」');
       if (c.audience === 'work' && ['D', 'E'].includes(p.role)) hard.push('資格不符：限服務業在職人員');
       if (c.audience === 'work' && p.role === 'F') soft.push('自由工作者需確認是否算服務業在職');
+      if (c.audience === 'insured' && p.role === 'D') hard.push('資格不符：限具勞保／就保／職保／農保的在職勞工');
+      if (c.audience === 'insured' && ['E', 'F'].includes(p.role)) soft.push('需確認有勞保、就保、職保或農保身分');
+      if (c.audience === 'insured' && p.fee === 'A') soft.push('一般身分需自付 20%（45 歲以上等特定對象全額補助）');
       const online = c.mode === '錄播';
-      if (!online && p.area && p.area !== 'D' && REGION_NAME[p.area] !== c.region) hard.push(`地區不符：在${c.city}上課`);
+      if (!online && c.region !== '不限' && p.area && p.area !== 'D' && REGION_NAME[p.area] !== c.region) hard.push(`地區不符：在${c.city}上課`);
       if (p.mode === 'B' && !online) soft.push('有實體或混成課程，需到現場');
       if (p.mode === 'C' && online) soft.push('這是線上錄播，不是實體課');
       if (!p.selfpay && /自費/.test(c.fee) && !/補助|免費/.test(c.fee)) hard.push('完全自費且無政府補助');
@@ -193,6 +196,7 @@ window.RadarTool = (function () {
       if (e.c.mode === '錄播') bits.push('免費錄播，隨時可看');
       else if (p.area && p.area !== 'D') bits.push(`在${e.c.city}，符合地區`);
       if (e.c.audience === 'youth') bits.push('青年班完訓可領獎勵');
+      if (e.c.audience === 'insured') bits.push('有勞保／就保就能用政府補助，3 年最高 10 萬');
       if (e.c.status === 'open') bits.push('官方列表顯示報名中');
       return bits.join('；') || '符合目前條件';
     }
@@ -221,7 +225,8 @@ ${describe(p).join('\n')}
 
 【硬規則】
 1. 只能從下方 JSON 的課程中挑選，用 id 指定，不可以自己新增課程或改寫課程資料。
-2. status 為 full（額滿）或 closed（截止）、已開課、資格不符（audience: work＝服務業在職；youth＝18–35 歲待業青年；all＝任何人）、地區不符（錄播除外）的課程，放進 exclude 並寫原因。
+2. status 為 full（額滿）或 closed（截止）、已開課、資格不符（audience: work＝服務業在職；youth＝18–35 歲待業青年；insured＝具勞保／就保／職保／農保的在職勞工；all＝任何人）、地區不符（錄播與全台課程除外）的課程，放進 exclude 並寫原因。
+2-1. 勞動部產業人才投資方案屬於政府補助（80%，45 歲以上等特定對象 100%），不是自費課程；學員只接受免費時，放在 consider 並說明需自付 20%。
 3. 完全自費且無政府補助的課程預設排除，除非學員說接受自費。
 4. best＋consider 合計最多 5 門；best 最多 3 門。
 5. status 為 check 代表官方列表沒標示報名狀態，不能說「報名中」。

@@ -907,3 +907,34 @@ button { font: inherit; color: inherit; }
 .how-rule { display: block; }
 .how-rule b { display: block; margin-bottom: .2em; }
 .set-done .done-row { font-size: var(--small); }
+
+/* ============ v4: 勞動部 ============ */
+.rmap { grid-template-columns: repeat(4, 1fr); }
+.rmap .rm-dl div { grid-template-columns: 1fr; gap: 0; }
+.rmap .rm-dl dt { font-size: var(--tiny); }
+.mol .bignum { font-size: clamp(80px, 10cqw, 170px); }
+.mol-rate { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(8px, 1cqw, 16px); }
+.mol-rate > div { padding: clamp(12px, 1.4cqw, 22px); display: flex; flex-direction: column; gap: .3em; border-radius: var(--r); }
+.mol-rate b { font-family: var(--font); font-size: clamp(30px, 3.6cqw, 60px); line-height: 1; color: var(--pt); letter-spacing: -.02em; }
+.mol-rate span { font-size: var(--small); color: var(--ink-2); line-height: 1.45; }
+.mol-full { background: linear-gradient(160deg, rgba(227,244,238,.95), rgba(255,255,255,.6)); }
+.mol-full b { color: var(--mint-ink); }
+.mol .src-card p.small { font-weight: 400; }
+.ojt { display: grid; grid-template-columns: 1fr 1.25fr; gap: var(--gap); align-items: center; }
+.ojt-l { display: flex; flex-direction: column; gap: clamp(12px, 1.4cqw, 24px); }
+.ojt-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(8px, 1cqw, 16px); }
+.ojt-steps li { display: flex; gap: .8em; align-items: flex-start; }
+.ojt-steps li > span { font-family: var(--font); flex: none; width: 1.9em; height: 1.9em; border-radius: 50%; display: grid; place-items: center; background: var(--pt); color: #fff; font-weight: 700; font-size: var(--small); }
+.ojt-steps b { display: block; font-size: var(--body); line-height: 1.35; }
+.ojt-steps small { display: block; font-size: var(--small); color: var(--ink-2); }
+.ojt-steps a { font-size: var(--small); font-weight: 700; text-decoration: none; }
+.ojt-r { display: flex; flex-direction: column; gap: clamp(10px, 1.2cqw, 20px); position: relative; }
+.shot { margin: 0; padding: clamp(6px, .7cqw, 12px); display: flex; flex-direction: column; gap: .4em; }
+.shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.shot figcaption { font-size: var(--tiny); color: var(--ink-2); font-weight: 600; padding-inline: .2em; }
+.shot-pick { width: 92%; align-self: flex-end; margin-top: calc(-1 * clamp(20px, 2.4cqw, 44px)); box-shadow: 0 30px 60px -24px rgba(28,30,39,.45), var(--shadow); border: 2px solid var(--pt); }
+@media (max-width: 900px) { .rmap { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 760px) {
+  .rmap, .ojt, .mol-rate { grid-template-columns: 1fr; }
+  .shot-pick { width: 100%; margin-top: 0; }
+}

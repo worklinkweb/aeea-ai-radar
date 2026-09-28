@@ -36,6 +36,7 @@ window.DECK = window.DECK || {};
       Object.assign({}, gcisYouth, { id: 'y06', title: 'AI創意內容行銷實戰班—生活服務產業進擊班(2)｜銘傳大學', start: '2026-11-02', region: '北', city: '臺北', hours: 242, status: 'open', topics: ['A', 'D'], level: 'A', regUrl: '' }),
       Object.assign({}, gcisYouth, { id: 'y07', title: '服務業品牌營運與智慧行銷AI人才培訓班｜中興大學', start: '2026-09-10', region: '中', city: '臺中', hours: 264, status: 'closed', topics: ['A', 'D'], level: 'A', regUrl: '' }),
 
+      { id: 'm01', title: '勞動部｜產業人才投資方案（在職訓練網查 AI 課程）', agency: '勞動部勞動力發展署', program: '產業人才投資方案', audience: 'insured', fee: '政府補助 80%；45 歲以上等特定對象 100%；3 年最高 10 萬元', eligibility: '年滿 15 歲在職勞工，具就保、勞保、職保或農保其中一種', mode: '依課程（實體或線上）', region: '不限', city: '全台各分署', start: '', hours: '依課程', status: 'check', topics: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], level: '', source: 'https://course.taiwanjobs.gov.tw/news/detail?id=e88fb77e-0a1f-4ab1-b46e-e249ed2029f4', regUrl: 'https://ojt.wda.gov.tw/', timeslot: '需人工確認（依各課程）' },
       Object.assign({}, sme, { id: 's01', title: '人工智慧基礎介紹', hours: '56 分鐘', topics: ['A'], level: 'A', source: S + '16774', regUrl: S + '16774' }),
       Object.assign({}, sme, { id: 's02', title: 'AI輔助經營社群', hours: '60 分鐘', topics: ['A', 'D'], level: 'A', source: S + '17722', regUrl: S + '17722' }),
       Object.assign({}, sme, { id: 's03', title: '用AI打造爆款臉書貼文！行銷文案3秒生成實戰班', hours: '60 分鐘', topics: ['A', 'D'], level: 'A', source: S + '17950', regUrl: S + '17950' }),

@@ -38,13 +38,13 @@ window.DECK = window.DECK || {};
 
   D.parts = [
     { id: 'open', label: '開場', short: 'Open', minutes: 2 },
-    { id: '1', label: '先用對 AI', short: 'P1', minutes: 8.8 },
-    { id: '2', label: 'Agent 時代', short: 'P2', minutes: 5.7 },
-    { id: '3', label: '政府 AI 資源', short: 'P3', minutes: 4.6 },
-    { id: '4', label: 'AI 課程資源', short: 'P4', minutes: 3.3 },
-    { id: '5', label: 'AI 學習雷達', short: 'P5', minutes: 8.2 },
-    { id: '6', label: '進階：AI 代理人', short: 'P6', minutes: 4 },
-    { id: 'end', label: '帶走', short: 'End', minutes: 3.4 }
+    { id: '1', label: '先用對 AI', short: 'P1', minutes: 8.3 },
+    { id: '2', label: 'Agent 時代', short: 'P2', minutes: 5.4 },
+    { id: '3', label: '政府 AI 資源', short: 'P3', minutes: 5.8 },
+    { id: '4', label: 'AI 課程資源', short: 'P4', minutes: 4.1 },
+    { id: '5', label: 'AI 學習雷達', short: 'P5', minutes: 7.5 },
+    { id: '6', label: '進階：AI 代理人', short: 'P6', minutes: 3.8 },
+    { id: 'end', label: '帶走', short: 'End', minutes: 3.1 }
   ];
 
   D.slides = [
@@ -81,7 +81,7 @@ window.DECK = window.DECK || {};
     /* ---------------- PART 1 ---------------- */
     {
       id: 'p1', part: '1', title: 'PART 1 先用對 AI', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
-      html: () => partDivider(1, 'AI 很強，<br>但先學會安全地用', '資料安全 · 影像使用 · 帳號設定', 9)
+      html: () => partDivider(1, 'AI 很強，<br>但先學會安全地用', '資料安全 · 影像使用 · 帳號設定', 8)
     },
     {
       id: 'basics', part: '1', title: 'AI 時代的三個基本功', duration: 0.4, transition: 'fade', source: [], demo: null,
@@ -140,7 +140,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'settings', part: '1', title: '現場一起做：關閉「為所有人持續加強模型」', duration: 2.5, transition: 'fade',
+      id: 'settings', part: '1', title: '現場一起做：關閉「為所有人持續加強模型」', duration: 2.2, transition: 'fade',
       source: ['openai-data-controls'], demo: 'chatgpt', builds: 5, buildStyle: 'hl',
       html: () => `
       <div class="settings" data-settings>
@@ -211,7 +211,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'cardprompt', part: '1', title: '節慶賀卡提示詞：保留我的臉', duration: 1.5, transition: 'fade', source: [], demo: null,
+      id: 'cardprompt', part: '1', title: '節慶賀卡提示詞：保留我的臉', duration: 1.3, transition: 'fade', source: [], demo: null,
       html: () => `
       <div class="cp">
         <div class="cp-l">
@@ -257,7 +257,7 @@ window.DECK = window.DECK || {};
     /* ---------------- PART 2 ---------------- */
     {
       id: 'p2', part: '2', title: 'PART 2 Agent 時代開始了', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
-      html: () => partDivider(2, '不是再問 AI，<br>而是開始交付工作', 'AI Agent · Mission Control · 第一個任務', 6)
+      html: () => partDivider(2, '不是再問 AI，<br>而是開始交付工作', 'AI Agent · Mission Control · 第一個任務', 5)
     },
     {
       id: 'intern', part: '2', title: 'AI Agent ＝ 很能幹的實習生', duration: 1, transition: 'fade', source: [], demo: null, builds: 2,
@@ -276,7 +276,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'mission', part: '2', title: 'Agent Mission Control', duration: 2.3, transition: 'fade', source: [], demo: null, builds: 5, buildStyle: 'fill',
+      id: 'mission', part: '2', title: 'Agent Mission Control', duration: 2.0, transition: 'fade', source: [], demo: null, builds: 5, buildStyle: 'fill',
       html: () => `
       <div class="mc glass" data-mission>
         <div class="mc-top">
@@ -336,7 +336,7 @@ window.DECK = window.DECK || {};
     /* ---------------- PART 3 ---------------- */
     {
       id: 'p3', part: '3', title: 'PART 3 政府 AI 人才資源', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
-      html: () => partDivider(3, '其實現在學 AI，<br>政府已經準備很多資源', '', 5)
+      html: () => partDivider(3, '其實現在學 AI，<br>政府已經準備很多資源', '', 6)
     },
     {
       id: 'year', part: '3', title: '2026 正在執行・2027 規劃中', duration: 0.4, transition: 'fade', source: [], demo: null,
@@ -388,6 +388,30 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
+      id: 'mol', part: '3', title: '勞動部：產業人才投資方案 3 年 10 萬', duration: 1.2, transition: 'fade', source: ['mol-news', 'mol-10w', 'mol-rules', 'ey-45'], demo: null,
+      html: () => `
+      <div class="bignum-wrap mol">
+        <div class="bignum-l">
+          <p class="eyebrow">3-4 · 勞動部勞動力發展署｜產業人才投資方案</p>
+          <p class="bignum">3<span class="unit">年</span>10<span class="unit">萬</span></p>
+          <p class="h2">在職勞工的學習補助</p>
+          <p class="tiny">自 2025/1/1 起，每人 3 年補助上限由 7 萬加碼為 10 萬。${src('mol-10w')}</p>
+        </div>
+        <div class="bignum-r">
+          <div class="mol-rate">
+            <div class="glass"><b>80%</b><span>一般在職勞工</span></div>
+            <div class="glass mol-full"><b>100%</b><span>45 歲以上（中高齡）、65 歲以上等特定對象 ${src('ey-45')}</span></div>
+          </div>
+          <div class="src-card glass">
+            <p>誰可以參加？</p>
+            <p class="small">年滿 15 歲在職勞工，具<b>就保、勞保、職保或農保</b>其中一種即可。只有就保也可以。</p>
+            <p class="tiny">完成訓練時數才能申請補助。${src('mol-news')}</p>
+          </div>
+          <div class="row-gap"><a class="demo-btn" href="https://ojt.wda.gov.tw/" target="_blank" rel="noopener">開啟在職訓練網<span class="demo-note">選「產業人才投資方案」</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>${src('mol-rules', '全額補助對象')}</div>
+        </div>
+      </div>`
+    },
+    {
       id: 'map', part: '3', title: 'AI 學習資源地圖', duration: 1.5, transition: 'fade', source: ['smelearning', 'gcis-home', 'ida-aimfg'], demo: null,
       html: () => `
       <div class="stack">
@@ -425,10 +449,10 @@ window.DECK = window.DECK || {};
     /* ---------------- PART 4 ---------------- */
     {
       id: 'p4', part: '4', title: 'PART 4 AI 課程資源', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
-      html: () => partDivider(4, '先學會自己找，<br>才知道怎麼交給 AI', 'AI 課程資源', 3)
+      html: () => partDivider(4, '先學會自己找，<br>才知道怎麼交給 AI', 'AI 課程資源', 4)
     },
     {
-      id: 'manual', part: '4', title: '官方找課入口（現場示範）', duration: 3, transition: 'fade', source: ['smelearning', 'gcis-working', 'gcis-youth', 'ida-aimfg'], demo: 'gcisWorking',
+      id: 'manual', part: '4', title: '官方找課入口（現場示範）', duration: 2.3, transition: 'fade', source: ['smelearning', 'gcis-working', 'gcis-youth', 'ida-aimfg'], demo: 'gcisWorking',
       html: () => `
       <div class="stack sites-wrap">
         <div class="row-between"><p class="eyebrow">4-1 · 官方找課入口：點網址，跟著路徑走</p><span class="pill warnp">內容依 ${V} 官方頁面整理</span></div>
@@ -444,6 +468,26 @@ window.DECK = window.DECK || {};
                 <a class="site-go" href="${x.url}" target="_blank" rel="noopener">開啟網站 ↗</a>
               </div>
             </article>`).join('')}
+        </div>
+      </div>`
+    },
+    {
+      id: 'ojt', part: '4', title: '勞動部在職訓練網：怎麼找', duration: 1.5, transition: 'fade', source: ['mol-ojt', 'mol-news'], demo: null, builds: 3, buildStyle: 'hl',
+      html: () => `
+      <div class="ojt">
+        <div class="ojt-l">
+          <p class="eyebrow">4-2 · 勞動部｜台灣就業通 在職訓練網</p>
+          <h2 class="h2">找 3 年 10 萬的課，<br>先選對方案</h2>
+          <ol class="ojt-steps">
+            <li data-b="1"><span>1</span><div><b>打開在職訓練網</b><a href="https://ojt.wda.gov.tw/" target="_blank" rel="noopener">ojt.wda.gov.tw ↗</a></div></li>
+            <li data-b="2"><span>2</span><div><b>第一個下拉選單選「產業人才投資方案」</b><small>預設是「分署自辦在職訓練」，要改掉</small></div></li>
+            <li data-b="3"><span>3</span><div><b>輸入「AI」＋選分署 → 查詢</b><small>預設只查最近 3 個月開訓，要看更多按「修改查詢條件」</small></div></li>
+          </ol>
+          <p class="small">報名前先登入會員，確認自己有勞保、就保、職保或農保。</p>
+        </div>
+        <div class="ojt-r">
+          <figure class="shot glass" data-b="1"><img src="${(D.shots || {}).ojtHome || ''}" alt="台灣就業通在職訓練網首頁"><figcaption>在職訓練網首頁</figcaption></figure>
+          <figure class="shot glass shot-pick" data-b="2"><img src="${(D.shots || {}).ojtPick || ''}" alt="查詢下拉選單選擇產業人才投資方案"><figcaption>下拉選單選「產業人才投資方案」</figcaption></figure>
         </div>
       </div>`
     },
@@ -492,7 +536,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'howitworks', part: '5', title: '雷達怎麼工作：了解你 → 檢查 → 輸出', duration: 2.4, transition: 'fade', source: [], demo: null, builds: 3,
+      id: 'howitworks', part: '5', title: '雷達怎麼工作：了解你 → 檢查 → 輸出', duration: 2.0, transition: 'fade', source: [], demo: null, builds: 3,
       html: () => `
       <div class="stack how-wrap">
         <p class="eyebrow">5-3 · 雷達怎麼工作</p>
@@ -522,7 +566,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'prompt', part: '5', title: 'AI 學習雷達 Prompt', duration: 2.3, transition: 'fade', source: [], demo: 'radar',
+      id: 'prompt', part: '5', title: 'AI 學習雷達 Prompt', duration: 2.0, transition: 'fade', source: [], demo: 'radar',
       html: () => `
       <div class="pr">
         <div class="pr-main">
@@ -567,7 +611,7 @@ window.DECK = window.DECK || {};
       html: () => partDivider(6, '雷達建好之後，<br>讓它自己動起來', '排程找課 · 你決定報名 · 寫進行事曆 · 上課提醒', 4)
     },
     {
-      id: 'loop', part: '6', title: '從一次找課，到每週替你留意', duration: 1.5, transition: 'fade', source: [], demo: null, builds: 5,
+      id: 'loop', part: '6', title: '從一次找課，到每週替你留意', duration: 1.3, transition: 'fade', source: [], demo: null, builds: 5,
       html: () => `
       <div class="stack">
         <p class="eyebrow">6-1 · 在自己的 AI 建好雷達之後呢？</p>
@@ -655,7 +699,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'takeaway', part: 'end', title: '今天帶得走的三樣東西', duration: 1.8, transition: 'fade', source: [], demo: 'radar',
+      id: 'takeaway', part: 'end', title: '今天帶得走的三樣東西', duration: 1.5, transition: 'fade', source: [], demo: 'radar',
       html: () => `
       <div class="tk">
         <div class="tk-l">
