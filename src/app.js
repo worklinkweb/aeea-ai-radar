@@ -182,6 +182,9 @@
   $$('[data-copy-tab]').forEach(btn => btn.addEventListener('click', () => {
     const pre = $('[data-ptext]', btn.closest('.pr')); copyText(ptext[pre.dataset.cur], btn);
   }));
+  // Holiday card prompt slide
+  $$('[data-card-pre]').forEach(pre => { pre.textContent = D.cardPrompt || ''; });
+  $$('[data-copy-card]').forEach(b => b.addEventListener('click', () => copyText(D.cardPrompt || '', b)));
   // Schedule prompt slide
   $$('[data-sp]').forEach(sp => {
     const pre = $('[data-sp-pre]', sp); let f = 'weekly';
@@ -278,7 +281,8 @@
   function onEnter(i) {
     if (i === lastEntered) return; lastEntered = i;
     const s = SL[i];
-    if (s.id === 'manual') wsPlay($('[data-workspace]', slidesEl[i]));
+    const wsEl = $('[data-workspace]', slidesEl[i]);
+    if (wsEl) wsPlay(wsEl);
     else clearInterval(ws.timer);
   }
 

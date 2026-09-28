@@ -29,7 +29,7 @@ src/
   data/policySources.js   官方來源（數字、狀態 VERIFIED / NEEDS VERIFICATION、查核日期）
   data/courseSources.js   AI 學習資源地圖、3 個現場 Demo 入口
   data/courseSnapshot.js  網頁內找課用的官方課程快照（24 門，2026/09/28 查核）
-  data/slides.js          41 頁投影片：duration / transition / demo / source / builds / html
+  data/slides.js          38 頁投影片：duration / transition / demo / source / builds / html
   data/speakerNotes.js    講者備註（只在講者模式渲染）
   data/prompts.js         AI 學習雷達 完整版 / 手機版 Prompt、7 題問卷
   styles.css              Liquid glass design system（container query 同時支援 16:9 簡報與手機捲動）
@@ -40,7 +40,7 @@ build.py                  合併成單一 HTML（dist/index.html、dist/artifact
 技術選擇：Vanilla JS + 單檔輸出。沒有用 React + Vite，因為內容以資料驅動即可，單檔更容易上傳、離線播放，不需建置環境。
 
 ## 時間配置（合計 40:00）
-開場 2 ・ Part 1 7 ・ Part 2 6 ・ Part 3 6 ・ Part 4 5 ・ Part 5 7 ・ Part 6 進階 4 ・ 帶走 3（41 頁）（每頁 duration 在 slides.js，可調）
+開場 2 ・ Part 1 8.8 ・ Part 2 5.7 ・ Part 3 4.6 ・ Part 4 3.3 ・ Part 5 8.2 ・ Part 6 4 ・ 帶走 3.4（38 頁）（每頁 duration 在 slides.js，可調）
 
 ## 網頁內直接找課
 - 只從 `courseSnapshot.js` 的官方快照挑選；課程欄位一律由快照帶出，AI 只負責挑選與說明理由。

@@ -250,5 +250,35 @@ window.DECK.policySources = {
       '可查詢行事曆內容（Pro、Max、Team、Enterprise）。',
       '官方限制：Claude 不能建立、修改或刪除日曆活動，也不能寄送邀請。'
     ]
+  },
+  'openai-retention': {
+    agency: 'OpenAI', title: 'OpenAI Help Center — Chat and file retention in ChatGPT',
+    url: 'https://help.openai.com/en/articles/8983778-chat-and-file-retention-policies-in-chatgpt',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['一般與封存的聊天會保存在帳號中，直到你刪除（或工作區保留政策移除）。', '刪除的聊天會排定在 30 天內從系統永久刪除；若已去識別化，或因安全、法律義務需保留則例外。', '臨時聊天可能因安全目的保留最多 30 天。']
+  },
+  'openai-business': {
+    agency: 'OpenAI', title: 'OpenAI — Business data privacy, security, and compliance',
+    url: 'https://openai.com/business-data/',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['ChatGPT Enterprise、Business、Edu 與 API 的資料，預設不用於訓練或改善模型。', '符合條件的組織可設定資料保存控制。']
+  },
+  'anthropic-consumer': {
+    agency: 'Anthropic', title: 'Anthropic — Updates to Consumer Terms and Privacy Policy（2025-08-28）',
+    url: 'https://www.anthropic.com/news/updates-to-our-consumer-terms',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['適用 Claude Free、Pro、Max（含從這些帳號使用 Claude Code）。', '允許資料用於模型訓練：保存期延長為 5 年；不允許：維持 30 天。', '刪除的對話不會用於日後的模型訓練。', '不適用商業條款服務：Claude for Work、Claude for Government、Claude for Education、API。']
+  },
+  'gemini-privacy': {
+    agency: 'Google', title: 'Gemini Apps Privacy Hub',
+    url: 'https://support.google.com/gemini/answer/13594961?hl=en',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['Gemini 應用程式活動記錄預設 18 個月自動刪除，可改為 3 個月、36 個月或不自動刪除。', '臨時對話、以及關閉「保留活動記錄」時的對話，會在帳號保留 72 小時。', '經人工審查的對話（與相關資料）不會隨活動記錄刪除，最多保留 3 年。', 'Google 會用資料來提供、開發和改善服務（包括訓練生成式 AI 模型）。', '公司或學校帳號可能適用不同條款。']
+  },
+  'workspace-privacy': {
+    agency: 'Google', title: 'Generative AI in Google Workspace Privacy Hub',
+    url: 'https://support.google.com/a/answer/15706919?hl=en',
+    verified: '2026/09/28', status: 'VERIFIED',
+    facts: ['未經客戶事先允許，Workspace 不會用客戶資料訓練模型。', '對話與上傳檔案不會在未經允許下由人工審查，或用於訓練網域外的生成式 AI 模型。', '開啟對話記錄時，管理員可設定 3、18 或 36 個月自動刪除，預設 18 個月；關閉時最多保留 72 小時。']
   }
 };

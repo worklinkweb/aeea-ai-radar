@@ -22,7 +22,7 @@ window.DECK = window.DECK || {};
       <div class="divider-body">
         <p class="eyebrow">PART ${n} · 約 ${mins} 分鐘</p>
         <h1 class="h1">${title}</h1>
-        <p class="lead">${sub}</p>
+        ${sub ? `<p class="lead">${sub}</p>` : ''}
       </div>
     </div>`;
   const radarDisc = (size = '') => `
@@ -38,13 +38,13 @@ window.DECK = window.DECK || {};
 
   D.parts = [
     { id: 'open', label: '開場', short: 'Open', minutes: 2 },
-    { id: '1', label: '先用對 AI', short: 'P1', minutes: 7 },
-    { id: '2', label: 'Agent 時代', short: 'P2', minutes: 6 },
-    { id: '3', label: '政府 AI 資源', short: 'P3', minutes: 6 },
-    { id: '4', label: '人工找課', short: 'P4', minutes: 5 },
-    { id: '5', label: 'AI 學習雷達', short: 'P5', minutes: 7 },
+    { id: '1', label: '先用對 AI', short: 'P1', minutes: 8.8 },
+    { id: '2', label: 'Agent 時代', short: 'P2', minutes: 5.7 },
+    { id: '3', label: '政府 AI 資源', short: 'P3', minutes: 4.6 },
+    { id: '4', label: 'AI 課程資源', short: 'P4', minutes: 3.3 },
+    { id: '5', label: 'AI 學習雷達', short: 'P5', minutes: 8.2 },
     { id: '6', label: '進階：AI 代理人', short: 'P6', minutes: 4 },
-    { id: 'end', label: '帶走', short: 'End', minutes: 3 }
+    { id: 'end', label: '帶走', short: 'End', minutes: 3.4 }
   ];
 
   D.slides = [
@@ -71,7 +71,7 @@ window.DECK = window.DECK || {};
         <p class="h2 muted-strong">會問 AI，是起點；</p>
         <p class="h1 thesis-main" data-b="1">會把工作交給 AI，<br>才是下一步。</p>
         <div class="route" data-b="2">
-          ${[['1', '先用對 AI'], ['2', 'Agent 時代'], ['3', '政府資源'], ['4', '自己找課'], ['5', 'AI 學習雷達'], ['6', '讓它自己動']]
+          ${[['1', '先用對 AI'], ['2', 'Agent 時代'], ['3', '政府資源'], ['4', 'AI 課程資源'], ['5', 'AI 學習雷達'], ['6', '讓它自己動']]
             .map(([n, t]) => `<div class="route-item glass" data-part-tint="${n}"><span class="route-n">PART ${n}</span><span>${t}</span></div>`).join('<span class="route-arrow">→</span>')}
         </div>
         <p class="kicker" data-b="2">AI 執行，人驗收。</p>
@@ -80,11 +80,11 @@ window.DECK = window.DECK || {};
 
     /* ---------------- PART 1 ---------------- */
     {
-      id: 'p1', part: '1', title: 'PART 1 先用對 AI', duration: 0.5, transition: 'fade', source: [], demo: null, divider: true,
-      html: () => partDivider(1, 'AI 很強，<br>但先學會安全地用', '資料安全 · 影像使用 · 帳號設定', 7)
+      id: 'p1', part: '1', title: 'PART 1 先用對 AI', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
+      html: () => partDivider(1, 'AI 很強，<br>但先學會安全地用', '資料安全 · 影像使用 · 帳號設定', 9)
     },
     {
-      id: 'basics', part: '1', title: 'AI 時代的三個基本功', duration: 0.5, transition: 'fade', source: [], demo: null,
+      id: 'basics', part: '1', title: 'AI 時代的三個基本功', duration: 0.4, transition: 'fade', source: [], demo: null,
       html: () => `
       <div class="stack">
         <p class="eyebrow">1-1 · AI 時代的三個基本功</p>
@@ -96,7 +96,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'pause3', part: '1', title: '給 AI 資料前，先停 3 秒', duration: 1, transition: 'fade', source: [], demo: null, builds: 3,
+      id: 'pause3', part: '1', title: '給 AI 資料前，先停 3 秒', duration: 0.8, transition: 'fade', source: [], demo: null, builds: 3,
       html: () => `
       <div class="pause">
         <div class="pause-num">3</div>
@@ -111,7 +111,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'deid', part: '1', title: '去識別化 Before / After', duration: 1, transition: 'fade', source: [], demo: null,
+      id: 'deid', part: '1', title: '去識別化 Before / After', duration: 0.8, transition: 'fade', source: [], demo: null,
       html: () => `
       <div class="stack">
         <p class="eyebrow">1-3 · 去識別化</p>
@@ -140,40 +140,37 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'settings', part: '1', title: '現場一起做：關閉「為所有人改善模型」', duration: 2, transition: 'fade',
+      id: 'settings', part: '1', title: '現場一起做：關閉「為所有人持續加強模型」', duration: 2.5, transition: 'fade',
       source: ['openai-data-controls'], demo: 'chatgpt', builds: 5, buildStyle: 'hl',
       html: () => `
       <div class="settings" data-settings>
         <div class="settings-head">
           <div>
-            <p class="eyebrow">1-4 · 30 秒，先把自己的資料設定看一次</p>
-            <h2 class="h2">關閉「為所有人改善模型」</h2>
-            <p class="en">Improve the model for everyone</p>
+            <p class="eyebrow">1-4 · 30 秒，先把自己的資料設定看一次（手機 App 實際畫面）</p>
+            <h2 class="h2">關閉「為所有人持續加強模型」</h2>
           </div>
           <div class="settings-tools">${src('openai-data-controls')}${demo('chatgpt')}</div>
         </div>
-        <div class="steps4">
-          <button type="button" class="step4 glass" data-b="1" data-step-click="1"><span class="step4-n">1</span><span class="step4-zh">帳戶選單 → 設定</span><span class="step4-en">Settings</span></button>
-          <button type="button" class="step4 glass" data-b="2" data-step-click="2"><span class="step4-n">2</span><span class="step4-zh">資料控管</span><span class="step4-en">Data controls</span></button>
-          <button type="button" class="step4 glass" data-b="3" data-step-click="3"><span class="step4-n">3</span><span class="step4-zh">為所有人改善模型</span><span class="step4-en">Improve the model for everyone</span></button>
-          <button type="button" class="step4 glass" data-b="4" data-step-click="4"><span class="step4-n">4</span><span class="toggle" aria-hidden="true"><span></span></span><span class="step4-en">OFF</span></button>
-        </div>
-        <div class="settings-done" data-b="5">
-          <div class="done-l glass">
-            <p class="done-t">完成。</p>
-            <p class="done-row"><span class="dot ok"></span>新的對話：<b>不會用來訓練模型</b></p>
-            <p class="done-row"><span class="dot keep"></span>聊天紀錄：<b>仍然保留</b></p>
+        <div class="set-body">
+          <div class="phones">
+            ${[['gear', '1', '側邊欄左下角', '齒輪（設定）'], ['menu', '2', '往下滑', '資料控制'], ['on', '3', '找到這個開關', '綠色＝開啟中'], ['off', '4', '點一下關閉', '灰色＝已關閉']]
+              .map(([k, n, a, b], i) => `<button type="button" class="phone" data-b="${i + 1}" data-step-click="${i + 1}"><span class="phone-img"><img src="${(D.shots || {})[k] || ''}" alt="ChatGPT 手機 App：${b}" loading="lazy"></span><span class="phone-cap"><span class="step4-n">${n}</span><span><small>${a}</small><b>${b}</b></span></span></button>`).join('')}
           </div>
-          <div class="done-r">
+          <div class="set-done" data-b="5">
+            <div class="done-l glass">
+              <p class="done-t">完成。</p>
+              <p class="done-row"><span class="dot ok"></span>新的對話：<b>不會用來訓練模型</b></p>
+              <p class="done-row"><span class="dot keep"></span>聊天紀錄：<b>仍然保留</b></p>
+            </div>
             <p class="neq">OFF <span>≠</span> 刪除聊天紀錄</p>
-            <p class="small">小提醒：若對某個回覆按讚或倒讚送出回饋，那段對話仍可能被用於改善模型。<br>這不是叫大家害怕 AI，而是先知道自己的設定。</p>
+            <p class="small">按讚／倒讚送出回饋時，那段對話仍可能被用於改善模型。</p>
+            <p class="tiny">電腦版：帳戶選單 → 設定 → 資料控管 → 為所有人改善模型（官方說明用語）。App 介面文字可能隨版本不同。</p>
           </div>
         </div>
-        <p class="tiny">手機版：側邊欄 → 個人圖示 → 資料控管 → 關閉。官方繁中介面名稱為「資料控管」。</p>
       </div>`
     },
     {
-      id: 'tempchat', part: '1', title: '進階：臨時聊天 Temporary Chat', duration: 0.5, transition: 'fade', source: ['openai-temp-chat'], demo: null,
+      id: 'tempchat', part: '1', title: '進階：臨時聊天 Temporary Chat', duration: 0.4, transition: 'fade', source: ['openai-temp-chat'], demo: null,
       html: () => `
       <div class="stack">
         <div class="row-between"><p class="eyebrow">1-5 · 進階安全小技巧</p>${src('openai-temp-chat')}</div>
@@ -188,7 +185,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'portrait', part: '1', title: '為什麼 AI 畫的「我」不像我？', duration: 1, transition: 'fade', source: [], demo: null,
+      id: 'portrait', part: '1', title: '為什麼 AI 畫的「我」不像我？', duration: 0.7, transition: 'fade', source: [], demo: null,
       html: () => `
       <div class="stack">
         <p class="eyebrow">1-6 · 為什麼 AI 畫的「我」不像我？</p>
@@ -214,16 +211,46 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'vendor', part: '1', title: '選 AI 工具看這 6 件事', duration: 0.5, transition: 'fade', source: [], demo: null,
+      id: 'cardprompt', part: '1', title: '節慶賀卡提示詞：保留我的臉', duration: 1.5, transition: 'fade', source: [], demo: null,
+      html: () => `
+      <div class="cp">
+        <div class="cp-l">
+          <p class="eyebrow">1-7 · 提示詞教學：節慶賀卡</p>
+          <h2 class="h2">放上全家福，<br>人卻不像自己？</h2>
+          <p class="small cp-why">因為 AI 預設會「重畫」人物。要明確告訴它：<b>臉不能動，只改其他地方。</b></p>
+          <ol class="tips">
+            <li><b>照片要清楚</b>正面、光線足、臉不要太小</li>
+            <li><b>先講「不能改」</b>臉部特徵、五官比例、髮型、膚色</li>
+            <li><b>再講「可以改」</b>背景、服裝、光線、風格</li>
+            <li><b>全家福要點名</b>「照片中共 4 人，從左到右…」</li>
+            <li><b>不像就退一步</b>「人物保持原樣，只改背景」</li>
+          </ol>
+        </div>
+        <div class="cp-r">
+          <div class="cp-card glass">
+            <div class="row-between"><p class="sp-k">可直接複製</p><button type="button" class="copy-btn" data-copy-card>複製提示詞</button></div>
+            <pre class="cp-pre" data-card-pre tabindex="0"></pre>
+          </div>
+          <p class="tiny">【】內換成你的節日與內容。別人的照片，請先取得本人同意。</p>
+        </div>
+      </div>`
+    },
+    {
+      id: 'vendor', part: '1', title: '付費版的資料保存多久？', duration: 1.4, transition: 'fade',
+      source: ['openai-retention', 'openai-business', 'anthropic-consumer', 'gemini-privacy', 'workspace-privacy'], demo: null,
       html: () => `
       <div class="stack">
-        <p class="eyebrow">補充 · 選 AI 工具時</p>
-        <h2 class="h2">不看名氣或國籍，看這 6 件事</h2>
-        <div class="six">
-          ${[['資料是否用於訓練', '有沒有開關、預設是什麼'], ['保存多久', '刪除後多久真的消失'], ['存取權限', '誰看得到、管理員能做什麼'], ['企業條款', '企業版與個人版規則不同'], ['資料位置', '資料存放在哪裡'], ['安全設定', '兩步驟驗證、分享權限']]
-            .map(([t, d], i) => `<div class="six-i glass"><span class="six-n">${i + 1}</span><p class="six-t">${t}</p><p class="six-d">${d}</p></div>`).join('')}
-        </div>
-        <p class="small">沒有「大公司一定安全」，也沒有「開源一定不安全」。逐項看設定與條款。</p>
+        <div class="row-between"><p class="eyebrow">補充 · 美國大公司重視個資嗎？看條款最準</p><span class="pill warnp">以官方說明為準 · ${V}</span></div>
+        <h2 class="h2">付費個人版，資料保存多久？</h2>
+        <div class="tbl-wrap"><table class="tbl tbl-ret">
+          <thead><tr><th>工具</th><th>個人版（含付費 Plus／Pro／AI Pro）</th><th>企業版（Business／Team／Workspace）</th></tr></thead>
+          <tbody>
+            <tr><td><b>ChatGPT</b></td><td>聊天紀錄<b>保存到你刪除</b>；刪除後 <b>30 天內</b>永久刪除（法律或安全需要可延長）；是否用於訓練可自己關閉 ${src('openai-retention')}</td><td><b>預設不用於訓練</b>；保存依組織政策 ${src('openai-business')}</td></tr>
+            <tr><td><b>Claude</b></td><td>允許用於訓練：保存 <b>5 年</b>；不允許：<b>30 天</b> ${src('anthropic-consumer')}</td><td>適用商業條款，不在上述個人版政策內 ${src('anthropic-consumer')}</td></tr>
+            <tr><td><b>Gemini</b></td><td>活動記錄預設 <b>18 個月</b>自動刪除（可改 3／36 個月）；關閉後仍保留 <b>72 小時</b>；經人工審查的對話最多 <b>3 年</b> ${src('gemini-privacy')}</td><td>未經允許<b>不用於訓練</b>、不做人工審查；預設 18 個月（可選 3／18／36 個月） ${src('workspace-privacy')}</td></tr>
+          </tbody>
+        </table></div>
+        <p class="small"><b>付費，不等於不訓練。</b>個人版記得自己關設定；公司資料，用企業版。</p>
       </div>`
     },
 
@@ -233,7 +260,7 @@ window.DECK = window.DECK || {};
       html: () => partDivider(2, '不是再問 AI，<br>而是開始交付工作', 'AI Agent · Mission Control · 第一個任務', 6)
     },
     {
-      id: 'intern', part: '2', title: 'AI Agent ＝ 很能幹的實習生', duration: 1.2, transition: 'fade', source: [], demo: null, builds: 2,
+      id: 'intern', part: '2', title: 'AI Agent ＝ 很能幹的實習生', duration: 1, transition: 'fade', source: [], demo: null, builds: 2,
       html: () => `
       <div class="stack center-y">
         <p class="eyebrow">2-1 · AI Agent 到底是什麼？</p>
@@ -249,7 +276,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'mission', part: '2', title: 'Agent Mission Control', duration: 2.2, transition: 'fade', source: [], demo: null, builds: 5, buildStyle: 'fill',
+      id: 'mission', part: '2', title: 'Agent Mission Control', duration: 2.3, transition: 'fade', source: [], demo: null, builds: 5, buildStyle: 'fill',
       html: () => `
       <div class="mc glass" data-mission>
         <div class="mc-top">
@@ -280,7 +307,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'firsttask', part: '2', title: '第一次交給 Agent 的工作', duration: 0.8, transition: 'fade', source: [], demo: null,
+      id: 'firsttask', part: '2', title: '第一次交給 Agent 的工作', duration: 0.7, transition: 'fade', source: [], demo: null,
       html: () => `
       <div class="stack center-y">
         <p class="eyebrow">2-3 · 什麼工作最適合第一次交給 Agent？</p>
@@ -292,7 +319,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'threesteps', part: '2', title: 'Agent 初學者三步驟', duration: 1.5, transition: 'fade', source: [], demo: null, builds: 3,
+      id: 'threesteps', part: '2', title: 'Agent 初學者三步驟', duration: 1.4, transition: 'fade', source: [], demo: null, builds: 3,
       html: () => `
       <div class="stack">
         <p class="eyebrow">2-4 · Agent 初學者三步驟</p>
@@ -309,21 +336,21 @@ window.DECK = window.DECK || {};
     /* ---------------- PART 3 ---------------- */
     {
       id: 'p3', part: '3', title: 'PART 3 政府 AI 人才資源', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
-      html: () => partDivider(3, '其實現在學 AI，<br>政府已經準備很多資源', '只回答一個問題：一般人和企業，有哪些 AI 學習資源？', 6)
+      html: () => partDivider(3, '其實現在學 AI，<br>政府已經準備很多資源', '', 5)
     },
     {
-      id: 'year', part: '3', title: '2026 ＝ 民國 115 年', duration: 0.4, transition: 'fade', source: [], demo: null,
+      id: 'year', part: '3', title: '2026 正在執行・2027 規劃中', duration: 0.4, transition: 'fade', source: [], demo: null,
       html: () => `
       <div class="stack center-y">
-        <p class="h1 year"><span class="en-big">2026</span> <span class="eq">＝</span> 民國 115 年</p>
+        <p class="h1 year"><span class="en-big">2026</span></p>
         <div class="years">
-          <div class="yr glass"><span class="pill mint">115 年</span><p class="yr-t">正在執行</p><p class="yr-d">今天介紹的課程與方案</p></div>
-          <div class="yr glass"><span class="pill lav">116 年</span><p class="yr-t">預算案／規劃</p><p class="yr-d">需經立法院審議，不是已執行成果</p></div>
+          <div class="yr glass"><span class="pill mint">2026 年</span><p class="yr-t">正在執行</p><p class="yr-d">今天介紹的課程與方案</p></div>
+          <div class="yr glass"><span class="pill lav">2027 年</span><p class="yr-t">預算案／規劃</p><p class="yr-d">需經立法院審議，不是已執行成果</p></div>
         </div>
       </div>`
     },
     {
-      id: 'sme200', part: '3', title: '200+ 免費 AI 課程', duration: 0.9, transition: 'fade', source: ['sme-200', 'smelearning'], demo: 'smelearning',
+      id: 'sme200', part: '3', title: '200+ 免費 AI 課程', duration: 0.8, transition: 'fade', source: ['sme-200', 'smelearning'], demo: 'smelearning',
       html: () => `
       <div class="bignum-wrap">
         <div class="bignum-l">
@@ -340,7 +367,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'gcis5w', part: '3', title: '5 萬人次 服務業 AI 人才', duration: 0.9, transition: 'fade', source: ['gcis-5w'], demo: 'gcisWorking',
+      id: 'gcis5w', part: '3', title: '5 萬人次 服務業 AI 人才', duration: 0.8, transition: 'fade', source: ['gcis-5w'], demo: 'gcisWorking',
       html: () => `
       <div class="bignum-wrap">
         <div class="bignum-l">
@@ -361,35 +388,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'enterprise', part: '3', title: '企業 AI 培訓輔導', duration: 1.3, transition: 'fade', source: ['sme-apply-115', 'gcis-enterprise'], demo: null,
-      html: () => `
-      <div class="stack">
-        <p class="eyebrow">3-4 · 企業 AI 培訓</p>
-        <h2 class="h2">補助給<b class="hl">企業辦培訓</b>，不是發給個人</h2>
-        <div class="ent">
-          <div class="ent-c glass">
-            <div class="row-between"><span class="agency">中企署 · 115 年度企業專區</span><span class="pill closed">115 年度申請已於 7/31 截止</span></div>
-            <div class="ent-nums">
-              <div><p class="ent-n">15<span>萬</span></p><p class="ent-l">單一企業最高（含稅）</p></div>
-              <div><p class="ent-n">30<span>萬</span></p><p class="ent-l">聯合型最高（含稅）</p></div>
-            </div>
-            <p class="tiny">單一企業：近 6 個月任 1 月勞保投保 10 人以上。可留意下一年度公告。</p>
-            ${src('sme-apply-115')}
-          </div>
-          <div class="ent-c glass">
-            <div class="row-between"><span class="agency">商發署 · 企業專班</span><span class="pill open">受理至 116/07/31</span></div>
-            <div class="ent-nums">
-              <div><p class="ent-n">75<span>萬</span></p><p class="ent-l">每班至多</p></div>
-              <div><p class="ent-n">30<span>人</span></p><p class="ent-l">參訓至少</p></div>
-            </div>
-            <p class="tiny">服務業企業單一或 2–5 家聯合申請，每企業至多 2 班（依官方頁面）。</p>
-            ${src('gcis-enterprise')}
-          </div>
-        </div>
-      </div>`
-    },
-    {
-      id: 'map', part: '3', title: 'AI 學習資源地圖', duration: 1.3, transition: 'fade', source: ['smelearning', 'gcis-home', 'ida-aimfg'], demo: null,
+      id: 'map', part: '3', title: 'AI 學習資源地圖', duration: 1.5, transition: 'fade', source: ['smelearning', 'gcis-home', 'ida-aimfg'], demo: null,
       html: () => `
       <div class="stack">
         <p class="eyebrow">3-5 · AI 學習資源地圖</p>
@@ -409,87 +408,53 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'y116', part: '3', title: '116 年度：預算案與規劃', duration: 0.9, transition: 'fade', source: ['nstc-116', 'ndc-ai10', 'ida-ipas', 'ida-budget-116'], demo: null,
+      id: 'y116', part: '3', title: '2027 年：預算案與規劃', duration: 0.8, transition: 'fade', source: ['nstc-116', 'ndc-ai10', 'ida-ipas', 'ida-budget-116'], demo: null,
       html: () => `
       <div class="stack">
-        <div class="row-between"><p class="eyebrow">3-6 · 116 年度</p><span class="pill lav big">116 年預算案／規劃</span></div>
+        <div class="row-between"><p class="eyebrow">3-6 · 2027 年</p><span class="pill lav big">2027 預算案／規劃</span></div>
         <h2 class="h2">未來方向：看得到規劃，還不是成果</h2>
         <div class="y116">
-          <div class="yb glass"><p class="yb-n">1,823<span>億</span></p><p class="yb-t">116 年科技預算案</p><p class="yb-d">整體科技預算，不等於 AI 人才預算</p>${src('nstc-116')}</div>
-          <div class="yb glass"><p class="yb-n">114–117</p><p class="yb-t">AI 新十大建設</p><p class="yb-d">行政院 115/1/28 核定，含人才生態系</p>${src('ndc-ai10')}</div>
-          <div class="yb glass"><p class="yb-n">½</p><p class="yb-t">iPAS AI 考試費減半</p><p class="yb-d">115–116 年度，初級每科 400 元</p>${src('ida-ipas')}</div>
+          <div class="yb glass"><p class="yb-n">1,823<span>億</span></p><p class="yb-t">2027 年科技預算案</p><p class="yb-d">整體科技預算，不等於 AI 人才預算</p>${src('nstc-116')}</div>
+          <div class="yb glass"><p class="yb-n">2025–28</p><p class="yb-t">AI 新十大建設</p><p class="yb-d">行政院 2026/1/28 核定，含人才生態系</p>${src('ndc-ai10')}</div>
+          <div class="yb glass"><p class="yb-n">½</p><p class="yb-t">iPAS AI 考試費減半</p><p class="yb-d">2026–2027 年，初級每科 400 元</p>${src('ida-ipas')}</div>
         </div>
-        <p class="small">人才培育經費分散於不同部會與計畫，本頁不自行加總。${src('ida-budget-116', '產發署 116 預算案')}</p>
+        <p class="small">人才培育經費分散於不同部會與計畫，本頁不自行加總。${src('ida-budget-116', '產發署 2027 預算案')}</p>
       </div>`
     },
 
     /* ---------------- PART 4 ---------------- */
     {
-      id: 'p4', part: '4', title: 'PART 4 不用 AI 怎麼找課', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
-      html: () => partDivider(4, '先學會自己找，<br>才知道怎麼交給 AI', '人工找課工作台 · 判斷條件 · 搜尋漏斗', 5)
+      id: 'p4', part: '4', title: 'PART 4 AI 課程資源', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
+      html: () => partDivider(4, '先學會自己找，<br>才知道怎麼交給 AI', 'AI 課程資源', 3)
     },
     {
-      id: 'manual', part: '4', title: '人工找課工作台', duration: 1.7, transition: 'fade', source: ['gcis-working'], demo: 'gcisWorking',
+      id: 'manual', part: '4', title: '官方找課入口（現場示範）', duration: 3, transition: 'fade', source: ['smelearning', 'gcis-working', 'gcis-youth', 'ida-aimfg'], demo: 'gcisWorking',
       html: () => `
-      <div class="ws" data-workspace>
-        <ol class="ws-steps">
-          ${['開官方網站', '搜尋 AI', '打開課程', '查資格', '查費用／補助', '查日期', '查時間', '查地點／線上', '確認仍可報名', '比較內容']
-            .map((t, i) => `<li><button type="button" data-ws="${i}"><span>${String(i + 1).padStart(2, '0')}</span>${t}</button></li>`).join('')}
-        </ol>
-        <div class="browser glass">
-          <div class="br-bar"><i></i><i></i><i></i><div class="br-url" data-hl="0">serv.gcis.nat.gov.tw/AOCAI/courses/working</div></div>
-          <div class="br-page">
-            <div class="br-search" data-hl="1"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> AI</div>
-            <div class="br-course" data-hl="2">
-              <p class="br-ct">商品新品上架策略：企畫、數據與商業應用</p>
-              <div class="br-fields">
-                <span data-hl="3">資格：<i>點進課程確認</i></span>
-                <span data-hl="4">費用：<i>點進課程確認</i></span>
-                <span data-hl="5">開課日：2026-09-29</span>
-                <span data-hl="6">時數：30 小時</span>
-                <span data-hl="7">地點：臺北</span>
-                <span data-hl="8">報名：<i>需確認</i></span>
+      <div class="stack sites-wrap">
+        <div class="row-between"><p class="eyebrow">4-1 · 官方找課入口：點網址，跟著路徑走</p><span class="pill warnp">內容依 ${V} 官方頁面整理</span></div>
+        <div class="sites">
+          ${(D.courseSites || []).map(x => `
+            <article class="site glass">
+              <div class="br-bar"><i></i><i></i><i></i><a class="br-url site-url" href="${x.url}" target="_blank" rel="noopener">${x.host}</a></div>
+              <div class="site-body">
+                <p class="site-org">${x.agency}${P[x.src] && P[x.src].status !== 'VERIFIED' ? ' <span class="badge warn">NEEDS VERIFICATION</span>' : ''}</p>
+                <p class="site-t">${x.name}</p>
+                <ul class="site-list">${x.items.map(i => `<li><span>${i[0]}</span><em>${i[1]}</em></li>`).join('')}</ul>
+                <p class="site-path">${x.path.map(t => `<span>${t}</span>`).join('<i>→</i>')}</p>
+                <a class="site-go" href="${x.url}" target="_blank" rel="noopener">開啟網站 ↗</a>
               </div>
-            </div>
-            <div class="br-course ghost" data-hl="9"><p class="br-ct">另一門課程……</p><p class="br-ct">再一門課程……</p></div>
-            <p class="br-cap">示意畫面，依 2026/09/28 官方頁面整理 ${src('gcis-working')}</p>
-          </div>
+            </article>`).join('')}
         </div>
-        <div class="ws-foot">${demo('gcisWorking')}<span class="small">每一門課，都要重複這 10 步。</span></div>
-      </div>`
-    },
-    {
-      id: 'criteria', part: '4', title: '找課真正要判斷什麼', duration: 1.2, transition: 'fade', source: [], demo: null,
-      html: () => `
-      <div class="stack">
-        <p class="eyebrow">4-2 · 找課真正要判斷什麼？</p>
-        <h2 class="h2">這 10 個條件，等一下會變成交給 AI 的「標準」</h2>
-        <div class="crit">
-          ${['主題', '程度', '身份', '年齡', '費用', '補助', '時間', '地點', '方式', '是否可報名'].map((t, i) => `<div class="crit-i glass"><span>${String(i + 1).padStart(2, '0')}</span>${t}</div>`).join('')}
-        </div>
-      </div>`
-    },
-    {
-      id: 'funnel', part: '4', title: '人工搜尋漏斗', duration: 1.8, transition: 'fade', source: [], demo: null, builds: 5,
-      html: () => `
-      <div class="funnel-wrap">
-        <div class="funnel">
-          <div class="fn f1" data-b="1"><b>20</b> 門<span>搜尋結果</span></div>
-          <div class="fn f2" data-b="2"><b>8</b> 門<span>資格符合</span></div>
-          <div class="fn f3" data-b="3"><b>3</b> 門<span>時間、費用可以</span></div>
-          <div class="fn f4" data-b="4"><b>1–2</b> 門<span>真正適合</span></div>
-        </div>
-        <p class="h2 funnel-q" data-b="5">這整件事，<br>能不能交給 AI？</p>
       </div>`
     },
 
     /* ---------------- PART 5 ---------------- */
     {
       id: 'p5', part: '5', title: 'PART 5 AI 學習雷達', duration: 0.3, transition: 'fade', source: [], demo: null, divider: true,
-      html: () => partDivider(5, '把找課，<br>變成你的第一個 Agent 任務', 'AI Learning Radar · Prompt · 人驗收', 7)
+      html: () => partDivider(5, '把找課，<br>變成你的第一個 Agent 任務', 'AI Learning Radar · Prompt · 人驗收', 8)
     },
     {
-      id: 'radar', part: '5', title: 'AI Learning Radar', duration: 0.8, transition: 'fade', source: [], demo: null,
+      id: 'radar', part: '5', title: 'AI Learning Radar', duration: 0.7, transition: 'fade', source: [], demo: null,
       html: () => `
       <div class="radar-stage">
         <div class="radar-copy">
@@ -505,83 +470,59 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'onboarding', part: '5', title: 'AI 先了解我', duration: 1.5, transition: 'fade', source: [], demo: null, builds: 4,
+      id: 'filter', part: '5', title: '雷達怎麼篩：10 個條件 → 1–2 門', duration: 1.8, transition: 'fade', source: [], demo: null, builds: 5,
       html: () => `
-      <div class="ob">
-        <div class="chat glass">
-          <div class="chat-h"><span class="mc-led"></span>AI 學習雷達</div>
-          <div class="bubble ai" data-b="1"><b>先了解你（一次 3 題）</b><br>1 想學什麼？ A 生成式 AI｜B 自動化｜C Agent｜D 行銷…<br>2 目前程度？ A 第一次｜B 會基本 ChatGPT｜C 工作中使用…<br>3 你的身份？ A 企業主｜B 在職｜C 主管／HR…</div>
-          <div class="bubble me" data-b="2">1A+C　2B　3A</div>
-          <div class="bubble ai" data-b="3">收到。再確認會影響資格與費用的 2 題：<br>4 可上課時間？　7 費用：A 只接受免費｜B 補助可以｜C 皆可</div>
-          <div class="bubble me" data-b="4">4B　7C</div>
-        </div>
-        <div class="ob-side">
-          <p class="eyebrow">5-2 · AI 先了解我</p>
-          <h2 class="h2">一次問 3–5 題，<br>你用簡碼回答</h2>
-          <div class="rule-card glass">
-            <p class="rule-k">硬規則</p>
-            <p class="rule-t">完全自費 ＋ 無政府補助</p>
-            <p class="rule-x">→ 預設排除</p>
-            <p class="small">除非你明確說：「我接受自費課程。」</p>
+      <div class="flt">
+        <div class="flt-l">
+          <p class="eyebrow">5-2 · 找課真正要判斷的 10 件事</p>
+          <h2 class="h2">人工要看 10 個條件，<br>AI 雷達一次比完</h2>
+          <div class="crit crit-sm">
+            ${['主題', '程度', '身份', '年齡', '費用', '補助', '時間', '地點', '方式', '可報名'].map((t, i) => `<div class="crit-i glass"><span>${String(i + 1).padStart(2, '0')}</span>${t}</div>`).join('')}
           </div>
         </div>
-      </div>`
-    },
-    {
-      id: 'workflow', part: '5', title: 'AI 開始工作', duration: 1, transition: 'fade', source: [], demo: null,
-      html: () => `
-      <div class="wf" data-workflow>
-        <div class="wf-head">
-          <div><p class="eyebrow">5-3 · AI 開始工作</p><h2 class="h2">一個任務，10 個檢查點</h2></div>
-          <button type="button" class="run-btn" data-wf-run>執行任務</button>
-        </div>
-        <ol class="wf-steps">
-          ${['了解需求', '搜尋官方網站', '確認來源', '檢查資格', '檢查費用', '檢查日期', '檢查地點', '確認是否仍可報名', '排除', '整理']
-            .map((t, i) => `<li class="wf-s" data-wf="${i}"><span class="wf-dot"></span><span class="wf-t">${t}</span></li>`).join('')}
-        </ol>
-        <div class="wf-log glass" data-wf-log aria-live="polite"><span class="wf-idle">按「執行任務」看 AI 的工作流程（示意）</span></div>
-      </div>`
-    },
-    {
-      id: 'output', part: '5', title: '輸出格式', duration: 1, transition: 'fade', source: ['gcis-working', 'smelearning'], demo: null,
-      html: () => `
-      <div class="out">
-        <div class="out-head"><div><p class="eyebrow">5-4 · 輸出格式　最多 5 門，分三區</p></div><span class="pill warnp">示意輸出 · 資料截至 ${V}</span></div>
-        <div class="out-grid">
-          <article class="oc glass oc-best">
-            <p class="oc-zone best">最適合我</p>
-            <p class="oc-name">商品新品上架策略：企畫、數據與商業應用</p>
-            <dl class="oc-dl">
-              <div><dt>主辦</dt><dd>經濟部商業發展署</dd></div>
-              <div><dt>適合原因</dt><dd>行銷主題、實作導向</dd></div>
-              <div><dt>資格</dt><dd><span class="need">需人工確認</span></dd></div>
-              <div><dt>費用／補助</dt><dd>政府全額補助（專區說明）</dd></div>
-              <div><dt>日期</dt><dd>2026-09-29 開課</dd></div>
-              <div><dt>上課方式</dt><dd><span class="need">需人工確認</span></dd></div>
-              <div><dt>地點</dt><dd>臺北</dd></div>
-              <div><dt>官方來源</dt><dd>serv.gcis.nat.gov.tw/AOCAI</dd></div>
-              <div><dt>報名網址</dt><dd><span class="need">需人工確認</span></dd></div>
-              <div><dt>最後查核</dt><dd>${V}</dd></div>
-            </dl>
-          </article>
-          <div class="oc-col">
-            <article class="oc glass">
-              <p class="oc-zone maybe">可以考慮</p>
-              <p class="oc-name">中小企業網路大學校 AI 主題專區線上課程</p>
-              <p class="oc-mini">免費 · 錄播 · 隨時上課 · 資格：<span class="need">需人工確認</span></p>
-            </article>
-            <article class="oc glass">
-              <p class="oc-zone no">這次先排除</p>
-              <p class="oc-name">某市售 AI 實戰班（示意）</p>
-              <p class="oc-mini">排除原因：完全自費，且無政府補助</p>
-            </article>
-            <p class="small">資料不足就寫「需人工確認」。<b>不能猜。</b></p>
+        <div class="flt-r">
+          <div class="funnel">
+            <div class="fn f1" data-b="1"><b>20</b> 門<span>搜尋結果</span></div>
+            <div class="fn f2" data-b="2"><b>8</b> 門<span>資格符合</span></div>
+            <div class="fn f3" data-b="3"><b>3</b> 門<span>時間、費用可以</span></div>
+            <div class="fn f4" data-b="4"><b>1–2</b> 門<span>真正適合</span></div>
           </div>
+          <p class="flt-q" data-b="5">這整件事，交給 AI。</p>
         </div>
       </div>`
     },
     {
-      id: 'prompt', part: '5', title: 'AI 學習雷達 Prompt', duration: 1.6, transition: 'fade', source: [], demo: 'radar',
+      id: 'howitworks', part: '5', title: '雷達怎麼工作：了解你 → 檢查 → 輸出', duration: 2.4, transition: 'fade', source: [], demo: null, builds: 3,
+      html: () => `
+      <div class="stack how-wrap">
+        <p class="eyebrow">5-3 · 雷達怎麼工作</p>
+        <div class="how" data-workflow>
+          <section class="how-c glass" data-b="1">
+            <p class="how-n">01 先了解你</p>
+            <div class="bubble ai">一次問 3–5 題：想學什麼？程度？身份？</div>
+            <div class="bubble me">1A+C　2B　3A</div>
+            <div class="how-rule"><b>硬規則</b>完全自費＋無政府補助 → 預設排除</div>
+          </section>
+          <section class="how-c glass" data-b="2">
+            <div class="row-between"><p class="how-n">02 逐項檢查</p><button type="button" class="run-btn sm" data-wf-run>執行</button></div>
+            <ol class="wf-steps how-steps">
+              ${['了解需求', '搜尋官方網站', '確認來源', '檢查資格', '檢查費用', '檢查日期', '檢查地點', '確認仍可報名', '排除', '整理']
+                .map((t, i) => `<li class="wf-s" data-wf="${i}"><span class="wf-dot"></span><span class="wf-t">${t}</span></li>`).join('')}
+            </ol>
+            <div class="wf-log how-log" data-wf-log aria-live="polite"><span class="wf-idle">按「執行」看流程（示意）</span></div>
+          </section>
+          <section class="how-c glass" data-b="3">
+            <p class="how-n">03 輸出三區（最多 5 門）</p>
+            <div class="zone-mini best"><b>最適合我</b><span>附官方來源、查核日期</span></div>
+            <div class="zone-mini maybe"><b>可以考慮</b><span>寫出適合原因</span></div>
+            <div class="zone-mini no"><b>這次先排除</b><span>寫出排除原因</span></div>
+            <p class="how-rule"><b>不能猜</b>查不到的欄位寫「<span class="need">需人工確認</span>」</p>
+          </section>
+        </div>
+      </div>`
+    },
+    {
+      id: 'prompt', part: '5', title: 'AI 學習雷達 Prompt', duration: 2.3, transition: 'fade', source: [], demo: 'radar',
       html: () => `
       <div class="pr">
         <div class="pr-main">
@@ -607,7 +548,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'verify', part: '5', title: '人最後還是要驗收', duration: 0.8, transition: 'fade', source: [], demo: null, builds: 4,
+      id: 'verify', part: '5', title: '人最後還是要驗收', duration: 0.7, transition: 'fade', source: [], demo: null, builds: 4,
       html: () => `
       <div class="stack center-y">
         <p class="eyebrow">5-5 · 人最後還是要驗收</p>
@@ -626,7 +567,7 @@ window.DECK = window.DECK || {};
       html: () => partDivider(6, '雷達建好之後，<br>讓它自己動起來', '排程找課 · 你決定報名 · 寫進行事曆 · 上課提醒', 4)
     },
     {
-      id: 'loop', part: '6', title: '從一次找課，到每週替你留意', duration: 1.4, transition: 'fade', source: [], demo: null, builds: 5,
+      id: 'loop', part: '6', title: '從一次找課，到每週替你留意', duration: 1.5, transition: 'fade', source: [], demo: null, builds: 5,
       html: () => `
       <div class="stack">
         <p class="eyebrow">6-1 · 在自己的 AI 建好雷達之後呢？</p>
@@ -659,7 +600,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'schedprompt', part: '6', title: '排程 Prompt ＋ 行事曆提醒', duration: 1.3, transition: 'fade', source: [], demo: null,
+      id: 'schedprompt', part: '6', title: '排程 Prompt ＋ 行事曆提醒', duration: 1.2, transition: 'fade', source: [], demo: null,
       html: () => `
       <div class="sp" data-sp>
         <div class="sp-main">
@@ -703,31 +644,25 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'tomorrow', part: 'end', title: '明天你可以換成', duration: 0.5, transition: 'fade', source: [], demo: 'radar',
+      id: 'tomorrow', part: 'end', title: '明天你可以換成', duration: 0.5, transition: 'fade', source: [], demo: null,
       html: () => `
-      <div class="tmr">
-        <div class="tmr-l">
-          <p class="h2 muted-strong">今天找的是課。</p>
-          <p class="h1">明天你可以換成：</p>
-          <div class="chips">
-            ${['找客戶', '市場研究', '整理報告', '會議追蹤', '內容規劃', '資料分析'].map(t => `<span class="chip glass">${t}</span>`).join('')}
-          </div>
-        </div>
-        <div class="pr-qr glass">
-          <div class="qr" data-qr></div>
-          <p class="pr-qr-t">同一套方法<br>換一個任務</p>
+      <div class="stack center-y">
+        <p class="h2 muted-strong">今天找的是課。</p>
+        <p class="h1">明天你可以換成：</p>
+        <div class="chips chips-lg">
+          ${['找客戶', '市場研究', '整理報告', '會議追蹤', '內容規劃', '資料分析'].map(t => `<span class="chip glass">${t}</span>`).join('')}
         </div>
       </div>`
     },
     {
-      id: 'takeaway', part: 'end', title: '今天帶得走的三樣東西', duration: 1.2, transition: 'fade', source: [], demo: 'radar',
+      id: 'takeaway', part: 'end', title: '今天帶得走的三樣東西', duration: 1.8, transition: 'fade', source: [], demo: 'radar',
       html: () => `
       <div class="tk">
         <div class="tk-l">
           <p class="eyebrow">帶走</p>
           <h2 class="h2">今天，你帶得走的三樣東西</h2>
           <ol class="tk-list">
-            <li><span>1</span><div><b>一個檢查過的資料設定</b><small>資料控管 → 為所有人改善模型</small></div></li>
+            <li><span>1</span><div><b>一個檢查過的資料設定</b><small>資料控制 → 為所有人持續加強模型 → 關閉</small></div></li>
             <li><span>2</span><div><b>一台可以直接執行的 AI 學習雷達</b><small>一句話就找課，也能每週自動找</small></div></li>
             <li><span>3</span><div><b>一套交付工作的方法</b><small>定義任務 → 目標／標準／邊界 → AI 執行，人驗收</small></div></li>
           </ol>
@@ -744,7 +679,7 @@ window.DECK = window.DECK || {};
       </div>`
     },
     {
-      id: 'final', part: 'end', title: '最後一句話', duration: 0.6, transition: 'fade', source: [], demo: null, builds: 3,
+      id: 'final', part: 'end', title: '最後一句話', duration: 0.4, transition: 'fade', source: [], demo: null, builds: 3,
       html: () => `
       <div class="final">
         <div class="final-glow" aria-hidden="true">${radarDisc('xl')}</div>

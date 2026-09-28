@@ -12,7 +12,7 @@ SRC = ROOT / 'src'
 DIST = ROOT / 'dist'
 DIST.mkdir(exist_ok=True)
 
-DATA_ORDER = ['policySources.js', 'courseSources.js', 'courseSnapshot.js', 'prompts.js', 'speakerNotes.js', 'slides.js']
+DATA_ORDER = ['policySources.js', 'courseSources.js', 'courseSnapshot.js', 'prompts.js', 'speakerNotes.js', 'shots.js', 'slides.js']
 
 radar_url = os.environ.get('RADAR_URL', '').strip()
 qr_js = ''
